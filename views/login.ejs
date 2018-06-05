@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+	<title> Login::Todos </title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./assets/login.css" rel="stylesheet">
+    
+</head>
+
+	<body>
+		
+        <div class="login-reg-panel">
+		<div class="login-info-box">
+			<h2>Have an account?</h2>
+			<p>Please provide credentials to sign-in</p>
+			<label id="label-register" for="log-reg-show">Login</label>
+			<input type="radio" name="active-log-panel" id="log-reg-show"  checked="checked">
+		</div>
+							
+		<div class="register-info-box">
+			<h2>Don't have an account?</h2>
+			<p>Register with us and get started now</p>
+			<label id="label-login" for="log-login-show">Register</label>
+			<input type="radio" name="active-log-panel" id="log-login-show">
+		</div>
+							
+		<div class="white-panel">
+			<div class="login-show">
+				<h2>LOGIN</h2>
+				<input type="text" placeholder="Email" id="login_email">
+				<input type="password" placeholder="Password" id="login_password">
+				<input type="button" value="Login" id="login_button">
+				<a href="">Forgot password?</a>
+			</div>
+			<div class="register-show">
+				<h2>REGISTER</h2>
+				<input type="text" placeholder="Email" id="register_email">
+				<input type="password" placeholder="Password" id="register_password">
+				<input type="password" placeholder="Confirm Password" id="register_confirm_password"><span id='message'></span>
+				<input type="button" value="Register" id="register_button">
+			</div>
+		</div>
+	</div>
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script type="text/javascript" src="./assets/login.js"></script>
+      
+	</body>
+
+</html>
+
+
