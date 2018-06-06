@@ -30,6 +30,27 @@ $('#login_button').click(function(){
             type: 'POST',
             url:'/users/login',
             data: logincredentials,
+             error: function (jqXHR, exception) {
+                var msg = '';
+                if (jqXHR.status === 0) {
+                    msg = 'Not connect.\n Verify Network.';
+                } else if (jqXHR.status == 404) {
+                    msg = 'Requested page not found. [404]';
+                } else if (jqXHR.status == 500) {
+                    msg = 'Internal Server Error [500].';
+                } else if (exception === 'parsererror') {
+                    msg = 'Requested JSON parse failed.';
+                } else if (exception === 'timeout') {
+                    msg = 'Time out error.';
+                } else if (exception === 'abort') {
+                    msg = 'Ajax request aborted.';
+                } else if (jqXHR.status === 400) {
+                    msg = 'Please check your credentials';
+                }else {
+                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                }
+                alert(msg);
+            },
             success: function(data , textStatus, request){
                 var d = new Date();
                 d.setDate(d.getDate()+1);
@@ -38,7 +59,8 @@ $('#login_button').click(function(){
                 location.href = '/todo';
                 
                
-            }
+            },
+        
         });
      }
      
@@ -156,8 +178,63 @@ $('#register_button').click(function(){
             type: 'POST',
             url:'/users',
             data: registercredentials,
+            error: function (jqXHR, exception) {
+                var msg = '';
+                if (jqXHR.status === 0) {
+                    msg = 'Not connect.\n Verify Network.';
+                } else if (jqXHR.status == 404) {
+                    msg = 'Requested page not found. [404]';
+                } else if (jqXHR.status == 500) {
+                    msg = 'Internal Server Error [500].';
+                } else if (exception === 'parsererror') {
+                    msg = 'Requested JSON parse failed.';
+                } else if (exception === 'timeout') {
+                    msg = 'Time out error.';
+                } else if (exception === 'abort') {
+                    msg = 'Ajax request aborted.';
+                } else if (jqXHR.status === 400) {
+                    msg = 'User already exists';
+                }else {
+                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                }
+                alert(msg);
+            },
             success: function(data){
-                alert("registered");
+                $.ajax({
+                    type: 'POST',
+                    url:'/users/login',
+                    data: registercredentials,
+                    error: function (jqXHR, exception) {
+                var msg = '';
+                if (jqXHR.status === 0) {
+                    msg = 'Not connect.\n Verify Network.';
+                } else if (jqXHR.status == 404) {
+                    msg = 'Requested page not found. [404]';
+                } else if (jqXHR.status == 500) {
+                    msg = 'Internal Server Error [500].';
+                } else if (exception === 'parsererror') {
+                    msg = 'Requested JSON parse failed.';
+                } else if (exception === 'timeout') {
+                    msg = 'Time out error.';
+                } else if (exception === 'abort') {
+                    msg = 'Ajax request aborted.';
+                } else if (jqXHR.status === 400) {
+                    msg = 'Please check your credentials';
+                }else {
+                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                }
+                alert(msg);
+            },
+                    success: function(data , textStatus, request){
+                        var d = new Date();
+                        d.setDate(d.getDate()+1);
+                        var expires = "expires="+d.toUTCString();
+                        document.cookie='x-auth='+ request.getResponseHeader('x-auth')+ ";" + expires + ";path=/";
+                        location.href = '/todo';
+                
+               
+            }
+        });
             }
         });
      }
